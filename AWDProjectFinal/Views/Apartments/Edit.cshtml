@@ -1,0 +1,63 @@
+﻿@model AWDProjectFinal.ViewModels.ApartmentsViewModel.ApartmentViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>ApartmentViewModel</h4>
+<hr />
+<div class="row"> 
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            @*@Html.DropDownListFor("AType",
+                (AType,"value", "text", htmlAttributes: new { @class = "form-control", @id="dropdown" })*@
+            @*<div class="form-group">
+                <label asp-for="ApartmentType" class="control-label"></label>
+                <select asp-for="ApartmentType" asp-items="ApartmentType">
+                    <option ></option>
+                </select>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="ApartmentType" class="control-label"></label>
+                <input asp-for="ApartmentType" class="form-control" />
+                <span asp-validation-for="ApartmentType" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AmountRoom" class="control-label"></label>
+                <input asp-for="AmountRoom" class="form-control" />
+                <span asp-validation-for="AmountRoom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

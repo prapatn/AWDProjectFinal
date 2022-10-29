@@ -2,7 +2,35 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div class="text-center">
+    <h1 class="display-4">สวัสดี!</h1>
+    <p>ยินดีต้อนรับสู่หน้าจัดการข้อมูลหอพักและข้อมูลเจ้าของหอพัก</p>
 </div>
+
+<div class="container">
+  <main class="grid">
+    <article>
+      <img src="https://as2.ftcdn.net/v2/jpg/05/36/94/65/1000_F_536946582_vRO9WTt2MhFh9h9b7lLh0Iw6ooo5Ixja.jpg" alt="Sample photo">
+      <div class="text">
+        <h3>หอพัก</h3>
+        <p>จัดการข้อมูลหอพัก</p>
+        <a asp-controller="Apartments" asp-action="Index" class="btn btn-primary btn-block">จัดการข้อมูล</a>
+      </div>
+    </article>
+      <article>
+      <img src="https://st3.depositphotos.com/6723736/35365/v/600/depositphotos_353654538-stock-illustration-young-men-looking-house-apartment.jpg" alt="Sample photo">
+      <div class="text">
+        <h3>เจ้าของหอพัก</h3>
+        <p>จัดการข้อมูลเจ้าของหอพัก</p>
+        <a href="https://codepen.io/collection/XdWJOQ/" class="btn btn-primary btn-block">จัดการข้อมูล</a>
+      </div>
+    </article>
+  </main>
+</div>
+    </body>
+</html>
