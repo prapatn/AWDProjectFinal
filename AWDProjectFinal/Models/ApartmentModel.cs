@@ -8,15 +8,17 @@ namespace AWDProjectFinal.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string? Name { get; set; }
-        public string? Address { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
         public ApartmentType ApartmentType { get; set; }
         //public List<SelectListItem> AType { get; set; }
         public int AmountRoom { get; set; } 
-        public string? Image { get; set; }
+        public string Image { get; set; }
         public OwnerApartment Owner { get; set; }
 
-       
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
+
     }
 
 

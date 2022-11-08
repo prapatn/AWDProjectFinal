@@ -10,10 +10,12 @@ namespace AWDProjectFinal.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private IMapper _mapper;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public ApartmentsController(IUnitOfWork unitOfWork,IMapper mapper) {
+        public ApartmentsController(IUnitOfWork unitOfWork,IMapper mapper, IWebHostEnvironment hostEnvironment) {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _hostEnvironment = hostEnvironment;
         }
 
         public ActionResult Index()
@@ -67,6 +69,18 @@ namespace AWDProjectFinal.Controllers
             try
             {
                 var model = _mapper.Map<ApartmentModel>(vm);
+                if (vm.ImageFile != null)
+                {
+                    Console.WriteLine("call if");
+                    string filePath = Path.Combine(_hostEnvironment.WebRootPath, "images", vm.Name);
+                    System.IO.File.Delete(filePath);
+                    model.Image = UploadFile(vm);
+                }
+                else
+                {
+                    Console.WriteLine("call else");
+                    model.Image = vm.Image;
+                }
                 _unitOfWork.Apartment.Update(model);
                 _unitOfWork.Save();
                 return RedirectToAction("Index","Apartments");
@@ -75,6 +89,24 @@ namespace AWDProjectFinal.Controllers
             {
                 return View();
             }
+        }
+
+        private string UploadFile(ApartmentViewModel p)
+        {
+            string fileName = "";
+            if (p.ImageFile != null)
+            {
+                //upload to folder image in wwwroot
+                string uploadDrive = Path.Combine(_hostEnvironment.WebRootPath, "images");
+                fileName = Guid.NewGuid().ToString() + "-" + p.ImageFile.FileName;
+                string filePath = Path.Combine(uploadDrive, fileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    p.ImageFile.CopyTo(fileStream);
+                }
+            }
+            return fileName;
         }
 
         // GET: ApartmentsController/Delete/5
