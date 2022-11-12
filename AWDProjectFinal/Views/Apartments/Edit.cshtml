@@ -1,0 +1,68 @@
+﻿@model AWDProjectFinal.ViewModels.ApartmentsViewModel.ApartmentViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>แก้ไขข้อมูลหอพัก</h1>
+
+<hr />
+<br />
+    <div class="col-md-4 center">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+             <div class="center">
+                <img src="@("~/images/"+Model.Image)" width="30%" height="30%" asp-append-version=true class="center"/>
+             </div>
+             <br />
+             <div>
+                <input asp-for="ImageFile" accept="images/*" class="center"/>
+            </div>   
+            <br />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            @*@Html.DropDownListFor("AType",
+                (AType,"value", "text", htmlAttributes: new { @class = "form-control", @id="dropdown" })*@
+            @*<div class="form-group">
+                <label asp-for="ApartmentType" class="control-label"></label>
+                <select asp-for="ApartmentType" asp-items="ApartmentType">
+                    <option ></option>
+                </select>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="ApartmentType" class="control-label"></label>
+                <input asp-for="ApartmentType" class="form-control" />
+                <span asp-validation-for="ApartmentType" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AmountRoom" class="control-label"></label>
+                <input asp-for="AmountRoom" class="form-control" />
+                <span asp-validation-for="AmountRoom" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+
+        <br />
+            <div class="form-group">
+                <input type="submit" value="แก้ไขข้อมูล" class="btn btn-primary center" />
+            </div>
+        </form>
+    </div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
