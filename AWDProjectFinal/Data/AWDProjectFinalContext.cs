@@ -1,9 +1,11 @@
-﻿using AWDProjectFinal.Models;
+﻿using AWDProjectFinal.Areas.Identity.Data;
+using AWDProjectFinal.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace AWDProjectFinal.Data
 {
-    public class AWDProjectFinalContext :DbContext
+    public class AWDProjectFinalContext : IdentityDbContext<ApplicationUser>
     {
         public AWDProjectFinalContext(DbContextOptions<AWDProjectFinalContext> options ): base(options)
         {
@@ -19,6 +21,7 @@ namespace AWDProjectFinal.Data
                 .HasMany(o => o.Apartments)
                 .WithOne(a => a.Owner)
                 .OnDelete(DeleteBehavior.Cascade);
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

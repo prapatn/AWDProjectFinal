@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AWDProjectFinal.Migrations
 {
     [DbContext(typeof(AWDProjectFinalContext))]
-    [Migration("20221025141203_MyMigration")]
+    [Migration("20221112094144_MyMigration")]
     partial class MyMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
