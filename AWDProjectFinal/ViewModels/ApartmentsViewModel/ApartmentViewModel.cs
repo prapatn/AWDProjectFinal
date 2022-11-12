@@ -10,8 +10,7 @@ namespace AWDProjectFinal.ViewModels.ApartmentsViewModel
         public ApartmentType ApartmentType { get; set; }
         public int AmountRoom { get; set; }
         public string Image { get; set; }
-
-        public IFormFile ImageFile { get; set; }
+        public IFormFile? ImageFile { get; set; }
     }
 
 

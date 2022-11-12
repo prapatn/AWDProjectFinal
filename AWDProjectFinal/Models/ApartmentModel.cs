@@ -17,7 +17,7 @@ namespace AWDProjectFinal.Models
         public OwnerApartment Owner { get; set; }
 
         [NotMapped]
-        public IFormFile ImageFile { get; set; }
+        public IFormFile? ImageFile { get; set; }
 
     }
 

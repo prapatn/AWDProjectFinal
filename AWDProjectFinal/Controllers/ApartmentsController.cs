@@ -57,7 +57,6 @@ namespace AWDProjectFinal.Controllers
         {
             var model = _unitOfWork.Apartment.GetById(id);
             var vm = _mapper.Map<ApartmentViewModel>(model); 
-
             return View(vm);
         }
 
@@ -66,34 +65,21 @@ namespace AWDProjectFinal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ApartmentViewModel vm)
         {
-            try
+            var model = _mapper.Map<ApartmentModel>(vm);
+            if (vm.ImageFile != null)
             {
-                var model = _mapper.Map<ApartmentModel>(vm);
-                if (vm.ImageFile != null)
-                {
-                    Console.WriteLine("call if");
-                    string filePath = Path.Combine(_hostEnvironment.WebRootPath, "images", vm.Name);
-                    System.IO.File.Delete(filePath);
-                    model.Image = UploadFile(vm);
-                }
-                else
-                {
-                    Console.WriteLine("call else");
-                    model.Image = vm.Image;
-                }
-                _unitOfWork.Apartment.Update(model);
-                _unitOfWork.Save();
-                return RedirectToAction("Index","Apartments");
+                string filePath = Path.Combine(_hostEnvironment.WebRootPath, "images", vm.Name);
+                System.IO.File.Delete(filePath);
+                model.Image = UploadFile(vm);
             }
-            catch
-            {
-                return View();
-            }
+            _unitOfWork.Apartment.Update(model);
+            _unitOfWork.Save();
+            return RedirectToAction("Index", "Apartments");
         }
 
         private string UploadFile(ApartmentViewModel p)
         {
-            string fileName = "";
+            string fileName = ""; 
             if (p.ImageFile != null)
             {
                 //upload to folder image in wwwroot

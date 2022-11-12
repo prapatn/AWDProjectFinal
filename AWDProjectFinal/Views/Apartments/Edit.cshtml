@@ -7,16 +7,18 @@
 <h1>แก้ไขข้อมูลหอพัก</h1>
 
 <hr />
-<div class="row"> 
-    <div class="col-md-4">
-        <form asp-action="Edit">
+<br />
+    <div class="col-md-4 center">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-             <div>
-             <label > image name </label>
-                <input asp-for="Image" class="form-control form-control-user">
-                <img src="@("~/images/"+Model.Image)" width="460" height="520" asp-append-version=true/>
+             <div class="center">
+                <img src="@("~/images/"+Model.Image)" width="30%" height="30%" asp-append-version=true class="center"/>
              </div>
-
+             <br />
+             <div>
+                <input asp-for="ImageFile" accept="images/*" class="center"/>
+            </div>   
+            <br />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -46,23 +48,20 @@
                 <input asp-for="AmountRoom" class="form-control" />
                 <span asp-validation-for="AmountRoom" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Image" class="control-label"></label>
                 <input asp-for="Image" class="form-control" />
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
-            <div><input asp-for="ImageFile" accept="images/*"/></div>           
 
+        <br />
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="แก้ไขข้อมูล" class="btn btn-primary center" />
             </div>
         </form>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
