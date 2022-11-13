@@ -10,11 +10,12 @@ namespace AWDProjectFinal.Controllers
     {
         HttpClientHandler _clientHandler = new HttpClientHandler();
         string host = "https://localhost:7253/api/Owner";
-        
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public OwnersController()
+
+        public OwnersController(IWebHostEnvironment hostEnvironment)
         {
-            
+            _hostEnvironment = hostEnvironment;
             _clientHandler.ServerCertificateCustomValidationCallback =
                 (sender, cert, chain, sslPolicyErrors) => { return true; };
         }
@@ -91,9 +92,9 @@ namespace AWDProjectFinal.Controllers
             OwnerApartment _owner = new OwnerApartment();
 
             if (owner.ImageFile!=null) {
-                /*string filePath = Path.Combine(_hostEnvironment.WebRootPath, "images", owner.Name);
+                string filePath = Path.Combine(_hostEnvironment.WebRootPath, "images", owner.Name);
                 System.IO.File.Delete(filePath);
-                owner.Image = UploadFile(owner);*/
+                owner.Image = UploadFile(owner);
             }
             using (var httpClient = new HttpClient(_clientHandler))
             {
@@ -114,14 +115,14 @@ namespace AWDProjectFinal.Controllers
             if (p.ImageFile != null)
             {
                 //upload to folder image in wwwroot
-                /*string uploadDrive = Path.Combine(_hostEnvironment.WebRootPath, "images");
+                string uploadDrive = Path.Combine(_hostEnvironment.WebRootPath, "images");
                 fileName = Guid.NewGuid().ToString() + "-" + p.ImageFile.FileName;
                 string filePath = Path.Combine(uploadDrive, fileName);
 
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
                     p.ImageFile.CopyTo(fileStream);
-                }*/
+                }
             }
             return fileName;
         }
