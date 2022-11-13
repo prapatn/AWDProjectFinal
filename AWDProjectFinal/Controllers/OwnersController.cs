@@ -29,6 +29,7 @@ namespace AWDProjectFinal.Controllers
         public async Task<List<OwnerApartment>> GetOwner() {
 
             List<OwnerApartment> owners = new List<OwnerApartment>();
+
             using (var httpClient = new HttpClient(_clientHandler))
             {
                 using (var response = await httpClient.GetAsync(host))
@@ -41,11 +42,26 @@ namespace AWDProjectFinal.Controllers
             return owners;
         }
 
+        public async Task<ActionResult> Details(int id)
+        {
+            OwnerApartment ownerDt = new OwnerApartment();
+            using (var httpClient = new HttpClient(_clientHandler))
+            {
+                using (var response = await httpClient.GetAsync("https://localhost:7253/api/Owner/id?id="+id))
+                {
+                    string strJson = await response.Content.ReadAsStringAsync();
+                    ownerDt = JsonConvert.DeserializeObject<OwnerApartment>(strJson);
+                }
+               
+            }
+             return View(ownerDt);
+        }
+
         // GET: OwnersController/Details/5
-        public ActionResult Details(int id)
+        /*public ActionResult Details(int id)
         {
             return View();
-        }
+        }*/
 
         // GET: OwnersController/Create
         public ActionResult Create()
@@ -56,11 +72,28 @@ namespace AWDProjectFinal.Controllers
         // POST: OwnersController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(OwnerApartment ownerCreates)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                OwnerApartment ownerC = new OwnerApartment();
+
+                    using (var httpClient = new HttpClient(_clientHandler))
+                {
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(ownerC),Encoding.UTF8, "application/json");
+
+                    using (var response = await httpClient.PostAsync("https://localhost:7253/api/Owner", content))
+                    {
+                        string strJson = await response.Content.ReadAsStringAsync();
+                        ownerC = JsonConvert.DeserializeObject<OwnerApartment>(strJson);
+                        if (ModelState.IsValid)
+                        {
+                            return RedirectToAction(nameof(Index));
+                        }
+                    }
+                   
+                }
+                     return View(ownerC);
             }
             catch
             {
