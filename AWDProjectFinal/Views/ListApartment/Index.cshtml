@@ -2,27 +2,30 @@
 
 <table class="table">
     <thead>
-        <td>
-            @Html.DisplayNameFor(m=>m.Id)
-        </td>
-        <td>
-            @Html.DisplayNameFor(m=>m.Name)
-        </td>
-        <td>
-            @Html.DisplayNameFor(m=>m.Address)
-        </td>
-        <td>
-            @Html.DisplayNameFor(m=>m.ApartmentType)
-        </td>
-        <td>
-            @Html.DisplayNameFor(m=>m.AmountRoom)
-        </td>
-        <td>
-            @Html.DisplayNameFor(m=>m.Owner)
-        </td>
-        <td>
-            Link
-        </td>
+         <tr>
+               <th>
+                    @Html.DisplayNameFor(m=>m.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m=>m.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m=>m.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m=>m.ApartmentType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m=>m.AmountRoom)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m=>m.Owner)
+                </th>
+                <th>
+          
+                </th>
+          </tr>
+       
     </thead>
     <tbody>
         @foreach (var item in Model)

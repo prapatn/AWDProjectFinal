@@ -95,25 +95,15 @@ namespace AWDProjectFinal.Controllers
             return fileName;
         }
 
-        // GET: ApartmentsController/Delete/5
-        public ActionResult Delete(int id)
+     
+        public  ActionResult Delete(int id)
         {
-            return View();
-        }
+            Console.WriteLine("DELETE"+ id);
+             ApartmentModel model = _unitOfWork.Apartment.GetById(id);
+             _unitOfWork.Apartment.Delete(model);
+            _unitOfWork.Save();
+            return RedirectToAction("Index", "Apartments");
 
-        // POST: ApartmentsController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

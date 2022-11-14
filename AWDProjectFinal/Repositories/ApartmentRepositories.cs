@@ -13,6 +13,12 @@ namespace AWDProjectFinal.Repositories
         {
             _context = context;
         }
+
+        public void Delete(ApartmentModel apartment)
+        {
+             _context.ApartmentModels.Remove(apartment);
+        }
+
         public List<ApartmentModel> GetAll()
         {
             return _context.ApartmentModels.ToList();
