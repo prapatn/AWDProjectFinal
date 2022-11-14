@@ -47,6 +47,7 @@ namespace AWDProjectFinal.Controllers
         // GET: ApartmentsController/Create
         public ActionResult Create()
         {
+            
             return View();
         }
 
