@@ -9,6 +9,13 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<div class="search-bar">
+        
+         <form class="search-form d-flex align-items-center" asp-controller="Owners" asp-action="Index" method="get">
+             <input type="text" name="search" placeholder="Search" title="Enter search keyword">
+             <button type="submit" title="Search">Search</button>
+         </form>
+    </div>
 <table class="table">
     <thead>
         <tr>
