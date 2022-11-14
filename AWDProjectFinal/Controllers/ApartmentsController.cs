@@ -24,6 +24,19 @@ namespace AWDProjectFinal.Controllers
             var vm = _mapper.Map<List<ApartmentViewModel>>(model);
             return View(vm);
         }
+        [HttpGet]
+        public ActionResult Index(string search)
+        {
+            if (!String.IsNullOrEmpty(search))
+            {
+                var models = _unitOfWork.Apartment.GetByTitle(search);
+                var vms = _mapper.Map<List<ApartmentViewModel>>(models);
+                return View(vms);
+            }
+            var model = _unitOfWork.Apartment.GetAll();
+            var vm = _mapper.Map<List<ApartmentViewModel>>(model);
+            return View(vm);
+        }
 
         // GET: ApartmentsController/Details/5
         public ActionResult Details(int id)

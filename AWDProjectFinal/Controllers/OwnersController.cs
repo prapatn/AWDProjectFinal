@@ -25,6 +25,17 @@ namespace AWDProjectFinal.Controllers
             var owner = await GetOwner();
             return View(owner);
         }
+        [HttpGet]
+        public async Task<IActionResult> Index(string search)
+        {
+            var owner = await GetOwner();
+            if (!String.IsNullOrEmpty(search))
+            {
+                owner = owner.Where(sh => sh.Name!.Contains(search)).ToList();
+            }
+
+            return View(owner);
+        }
 
         [HttpGet]
         public async Task<List<OwnerApartment>> GetOwner() {
