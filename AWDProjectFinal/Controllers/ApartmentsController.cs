@@ -24,6 +24,19 @@ namespace AWDProjectFinal.Controllers
             var vm = _mapper.Map<List<ApartmentViewModel>>(model);
             return View(vm);
         }
+        [HttpGet]
+        public ActionResult Index(string search)
+        {
+            if (!String.IsNullOrEmpty(search))
+            {
+                var models = _unitOfWork.Apartment.GetByTitle(search);
+                var vms = _mapper.Map<List<ApartmentViewModel>>(models);
+                return View(vms);
+            }
+            var model = _unitOfWork.Apartment.GetAll();
+            var vm = _mapper.Map<List<ApartmentViewModel>>(model);
+            return View(vm);
+        }
 
         // GET: ApartmentsController/Details/5
         public ActionResult Details(int id)
@@ -34,6 +47,7 @@ namespace AWDProjectFinal.Controllers
         // GET: ApartmentsController/Create
         public ActionResult Create()
         {
+            
             return View();
         }
 
@@ -95,25 +109,15 @@ namespace AWDProjectFinal.Controllers
             return fileName;
         }
 
-        // GET: ApartmentsController/Delete/5
-        public ActionResult Delete(int id)
+     
+        public  ActionResult Delete(int id)
         {
-            return View();
-        }
+            Console.WriteLine("DELETE"+ id);
+             ApartmentModel model = _unitOfWork.Apartment.GetById(id);
+             _unitOfWork.Apartment.Delete(model);
+            _unitOfWork.Save();
+            return RedirectToAction("Index", "Apartments");
 
-        // POST: ApartmentsController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

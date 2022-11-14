@@ -4,17 +4,18 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>แก้ไขข้อมูลเจ้าของหอพัก</h1>
 
-<h4>OwnerApartment</h4>
 <hr />
+<br />
 <div class="row">
     <div class="col-md-4 center">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="center">
                 <img src="@("~/images/"+Model.Image)" width="30%" height="30%" asp-append-version=true class="center"/>
              </div>
+             <br />
              <div>
                 <input asp-for="ImageFile" accept="images/*" class="center"/>
             </div>
@@ -30,7 +31,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" class="form-control" />
+                <input asp-for="Image" class="form-control" disabled/>
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
             <br />

@@ -4,11 +4,18 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>รายการเจ้าของหอพัก</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<div class="search-bar">
+        
+         <form class="search-form d-flex align-items-center" asp-controller="Owners" asp-action="Index" method="get">
+             <input type="text" name="search" placeholder="Search" title="Enter search keyword">
+             <button type="submit" title="Search">Search</button>
+         </form>
+    </div>
 <table class="table">
     <thead>
         <tr>
@@ -42,11 +49,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Image)
             </td>
+            
             <td>
                 @Html.ActionLink("Details", "Details", new {  id=item.Id})
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.Id})
+                @Html.ActionLink("Edit", "Edit", new {  id=item.Id}) 
+                @Html.ActionLink("Delete", "Delete", new {  id=item.Id}, new { onclick = "return confirm('Are sure wants to delete?');" })
             </td>
             
         </tr>

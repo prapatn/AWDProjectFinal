@@ -4,10 +4,12 @@ namespace AWDProjectFinal.interfaces
 {
     public interface IApartment
     {
-        List<ApartmentModel> GetAll();
+        List<ApartmentModel>? GetAll();
 
-        ApartmentModel GetById(int Id);
+        ApartmentModel? GetById(int Id);
+        List<ApartmentModel> GetByTitle(string title);
 
         void Update(ApartmentModel apartment);
+        void Delete(ApartmentModel apartment);
     }
 }

@@ -6,6 +6,16 @@
 
 <h1>รายการหอพัก</h1>
 <br />
+<div class="d-flex flex-row">
+    <div class="search-bar">
+        
+         <form class="search-form d-flex align-items-center" asp-controller="Apartments" asp-action="Index" method="get">
+             <input type="text" name="search" placeholder="Search" title="Enter search keyword">
+             <button type="submit" title="Search">Search</button>
+         </form>
+    </div>
+</div>
+<br />
 
 <table class="table">
     <thead>
@@ -56,6 +66,8 @@
     
             <td>
                 @Html.ActionLink("Edit", "Edit", new {  id=item.Id })
+                @Html.ActionLink("Delete", "Delete", new {  id=item.Id}, new { onclick = "return confirm('Are sure wants to delete?');" })
+
             </td>
         </tr>
 }
