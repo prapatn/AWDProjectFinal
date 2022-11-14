@@ -80,20 +80,22 @@ namespace AWDProjectFinal.Controllers
 
                     using (var httpClient = new HttpClient(_clientHandler))
                 {
-                    StringContent content = new StringContent(JsonConvert.SerializeObject(ownerC),Encoding.UTF8, "application/json");
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(ownerCreates),Encoding.UTF8, "application/json");
 
                     using (var response = await httpClient.PostAsync("https://localhost:7253/api/Owner", content))
                     {
                         string strJson = await response.Content.ReadAsStringAsync();
                         ownerC = JsonConvert.DeserializeObject<OwnerApartment>(strJson);
+                        Console.WriteLine(ownerC);
                         if (ModelState.IsValid)
                         {
                             return RedirectToAction(nameof(Index));
+                           
                         }
                     }
                    
                 }
-                     return View(ownerC);
+                    return RedirectToAction(nameof(Index));
             }
             catch
             {
