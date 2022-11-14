@@ -9,5 +9,6 @@ namespace AWDProjectFinal.interfaces
         ApartmentModel GetById(int Id);
 
         void Update(ApartmentModel apartment);
+        void Delete(ApartmentModel apartment);
     }
 }
