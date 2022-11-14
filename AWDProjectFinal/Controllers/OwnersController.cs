@@ -127,9 +127,18 @@ namespace AWDProjectFinal.Controllers
         }
 
         // GET: OwnersController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            string del = "";
+            string host = "https://localhost:7253/api/Owner/";
+            using (var httpClient = new HttpClient(_clientHandler))
+            {
+                using (var response = await httpClient.DeleteAsync(host + id))
+                {
+                    del = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: OwnersController/Delete/5
