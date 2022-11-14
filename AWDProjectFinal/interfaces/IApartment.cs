@@ -8,7 +8,7 @@ namespace AWDProjectFinal.interfaces
 
         ApartmentModel? GetById(int Id);
         List<ApartmentModel> GetByTitle(string title);
-
+        void Insert(ApartmentModel apartment);
         void Update(ApartmentModel apartment);
         void Delete(ApartmentModel apartment);
     }

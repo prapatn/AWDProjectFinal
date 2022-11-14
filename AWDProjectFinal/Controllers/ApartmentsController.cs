@@ -3,6 +3,7 @@ using AWDProjectFinal.interfaces;
 using AWDProjectFinal.Models;
 using AWDProjectFinal.ViewModels.ApartmentsViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AWDProjectFinal.Controllers
 { 
@@ -47,18 +48,47 @@ namespace AWDProjectFinal.Controllers
         // GET: ApartmentsController/Create
         public ActionResult Create()
         {
+            var tagsFromRepo = _unitOfWork.Owner.GetAll();
+            var selectList = new List<SelectListItem>();
+            foreach(var item in tagsFromRepo)
+            {
+                selectList.Add(new SelectListItem(item.Name, item.Id.ToString()));
+            }
+            var vm = new CreatePostViewModel()
+            {
+                selectOwner = selectList
+            };
             
-            return View();
+            return View(vm);
         }
 
         // POST: ApartmentsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(CreatePostViewModel vm)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+        
+                
+                ApartmentModel apm = new ApartmentModel()
+                {
+                    Name = vm.Name,
+                    Address = vm.Address,
+                    AmountRoom = vm.AmountRoom,
+                    ApartmentType = vm.ApartmentType,
+                    
+                    
+                };
+                var owner = _unitOfWork.Owner.GetById(vm.Selectnameowner);
+                apm.Owner = owner;
+                
+                Console.Write("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                Console.Write(vm.Selectnameowner);
+                _unitOfWork.Apartment.Insert(apm);
+                _unitOfWork.Save();
+                return RedirectToAction("Index");
+
             }
             catch
             {

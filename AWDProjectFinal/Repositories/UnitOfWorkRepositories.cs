@@ -7,6 +7,8 @@ namespace AWDProjectFinal.Repositories
     {
         private readonly AWDProjectFinalContext _context;
         private IApartment _apartmentRepo;
+        private IOwner _ownerRepo;
+      
 
         public UnitOfWorkRepositories(AWDProjectFinalContext context) { 
             _context = context;
@@ -18,7 +20,15 @@ namespace AWDProjectFinal.Repositories
             }
         }
 
-        public IOwner Owner => throw new NotImplementedException();
+        public IOwner Owner
+        {
+            get
+            {
+                return _ownerRepo = _ownerRepo ?? new OwnerRepo(_context);
+            }
+        }
+
+      
 
         public void Save()
         {

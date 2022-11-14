@@ -31,7 +31,10 @@ namespace AWDProjectFinal.Repositories
         {
             return _context.ApartmentModels.FirstOrDefault(x => x.Id == Id);
         }
-
+        public void Insert(ApartmentModel apartment)
+        {
+            _context.ApartmentModels.Add(apartment);
+        }
         public void Update(ApartmentModel apartment)
         {
             _context.ApartmentModels.Update(apartment);

@@ -5,6 +5,7 @@ namespace AWDProjectFinal.Models
 {
     public class OwnerApartment
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
