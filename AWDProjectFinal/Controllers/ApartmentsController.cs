@@ -42,7 +42,10 @@ namespace AWDProjectFinal.Controllers
         // GET: ApartmentsController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var model = _unitOfWork.Apartment.GetById(id);
+            var vm = _mapper.Map<ApartmentViewModel>(model);
+
+            return View(vm);
         }
 
         // GET: ApartmentsController/Create
