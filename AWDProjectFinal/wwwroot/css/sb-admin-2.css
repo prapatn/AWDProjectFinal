@@ -89,6 +89,8 @@ p {
   margin-bottom: 1rem;
 }
 
+
+
 abbr[title],
 abbr[data-original-title] {
   text-decoration: underline;
@@ -2944,6 +2946,11 @@ fieldset:disabled a.btn {
 .btn-block {
   display: block;
   width: 100%;
+}
+
+.btn-create {
+    display: block;
+    width: 50px;
 }
 
 .btn-block + .btn-block {
@@ -10878,19 +10885,22 @@ a:focus {
   background-size: cover;
 }
 
+.margin-from {
+    margin: 35px;
+}
 
 form.user .custom-checkbox.small label {
   line-height: 1.5rem;
 }
 
 form.user .form-control-user {
-  font-size: 0.8rem;
+  font-size: 2rem;
   border-radius: 10rem;
   padding: 1.5rem 1rem;
 }
 
 form.user .btn-user {
-  font-size: 0.8rem;
+  font-size: 2rem;
   border-radius: 10rem;
   padding: 0.75rem 1rem;
 }
