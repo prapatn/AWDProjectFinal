@@ -3,44 +3,70 @@
 @{
     ViewData["Title"] = "Details";
 }
+<html>
+    <head>
+         <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-<h1>Details</h1>
+        <title>SB Admin 2 - Dashboard</title>
 
-<div>
-    <h4>OwnerApartment</h4>
-    <hr />
-    <dl class="row">
+        <!-- Custom fonts for this template-->
+        <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
 
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <div class= "col-sm-10">
-                <img src="@("~/images/"+Model.Image)" width="30%" height="30%" asp-append-version=true/>
-             </div>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-    </dl>
-</div>
-<div>
+        <!-- Custom styles for this template-->
+        <link href="~/css/sb-admin-2.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <h1 class="h1 mb-2 text-gray-900">Details</h1>
+
+        <div>
+            <h4 class="h4 mb-2 text-gray-900">OwnerApartment</h4>
+            <hr />
+            <div class="card shadow col-md-6 center">
+                <div style="margin:35px">
+                    <dl class="row">
+
+                        <dt class = "col-sm-2">
+                            @Html.DisplayNameFor(model => model.Id)
+                        </dt>
+                        <dd class = "col-sm-10">
+                            @Html.DisplayFor(model => model.Id)
+                        </dd>
+                        <dt class = "col-sm-2">
+                            @Html.DisplayNameFor(model => model.Name)
+                        </dt>
+                        <dd class = "col-sm-10">
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
+                        <dt class = "col-sm-2">
+                            @Html.DisplayNameFor(model => model.Phone)
+                        </dt>
+                        <dd class = "col-sm-10">
+                            @Html.DisplayFor(model => model.Phone)
+                        </dd>
+                        <dt class = "col-sm-2">
+                            @Html.DisplayNameFor(model => model.Image)
+                        </dt>
+                        <div class= "col-sm-10">
+                                <img src="@("~/images/"+Model.Image)" width="50%" height="50%" asp-append-version=true/>
+                             </div>
+                        <dd class = "col-sm-10">
+                            @Html.DisplayFor(model => model.Image)
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div>
     
-    <a asp-action="Index">Back to List</a>
-</div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </body>
+</html>
+
