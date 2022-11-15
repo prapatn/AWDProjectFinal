@@ -86,16 +86,26 @@ namespace AWDProjectFinal.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(OwnerApartment ownerCreates)
         {
+            
             try
             {
-                OwnerApartment ownerC = new OwnerApartment();
 
-                    using (var httpClient = new HttpClient(_clientHandler))
+                OwnerApartment ownerC = new OwnerApartment();
+                //string filename = UploadFile(ownerCreates);
+                if (ownerCreates.ImageFile != null)
+                {
+                    string filePath = Path.Combine(_hostEnvironment.WebRootPath, "images", ownerCreates.Name);
+                    System.IO.File.Delete(filePath);
+                    ownerCreates.Image = UploadFile(ownerCreates);
+                }
+
+                using (var httpClient = new HttpClient(_clientHandler))
                 {
                     StringContent content = new StringContent(JsonConvert.SerializeObject(ownerCreates),Encoding.UTF8, "application/json");
 
                     using (var response = await httpClient.PostAsync("https://localhost:7253/api/Owner", content))
                     {
+                        
                         string strJson = await response.Content.ReadAsStringAsync();
                         ownerC = JsonConvert.DeserializeObject<OwnerApartment>(strJson);
                         Console.WriteLine(ownerC);
