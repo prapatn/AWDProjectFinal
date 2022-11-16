@@ -77,12 +77,18 @@ namespace AWDProjectFinal.Controllers
                     Name = vm.Name,
                     Address = vm.Address,
                     AmountRoom = vm.AmountRoom,
-                    ApartmentType = vm.ApartmentType,  
-                    Image = vm.Image,
+                    ApartmentType = vm.ApartmentType,
+                    ImageFile = vm.ImageFile,
                 };
                 var owner = _unitOfWork.Owner.GetById(vm.Selectnameowner);
                 apm.Owner = owner;
-                
+                if (vm.ImageFile != null)
+                {
+                    string filePath = Path.Combine(_hostEnvironment.WebRootPath, "images", vm.Name);
+                    System.IO.File.Delete(filePath);
+                    apm.Image = UploadFile(apm);
+                }
+
                 _unitOfWork.Apartment.Insert(apm);
                 _unitOfWork.Save();
                 return RedirectToAction("Index");
@@ -112,14 +118,14 @@ namespace AWDProjectFinal.Controllers
             {
                 string filePath = Path.Combine(_hostEnvironment.WebRootPath, "images", vm.Name);
                 System.IO.File.Delete(filePath);
-                model.Image = UploadFile(vm);
+                model.Image = UploadFile(model);
             }
             _unitOfWork.Apartment.Update(model);
             _unitOfWork.Save();
             return RedirectToAction("Index", "Apartments");
         }
 
-        private string UploadFile(ApartmentViewModel p)
+        private string UploadFile(ApartmentModel p)
         {
             string fileName = ""; 
             if (p.ImageFile != null)
