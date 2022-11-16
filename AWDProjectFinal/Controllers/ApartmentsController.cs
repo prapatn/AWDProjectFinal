@@ -68,23 +68,18 @@ namespace AWDProjectFinal.Controllers
         public ActionResult Create(CreatePostViewModel vm)
         {
             try
-            {
-        
-                
+            { 
                 ApartmentModel apm = new ApartmentModel()
                 {
                     Name = vm.Name,
                     Address = vm.Address,
                     AmountRoom = vm.AmountRoom,
-                    ApartmentType = vm.ApartmentType,
-                    
-                    
+                    ApartmentType = vm.ApartmentType,  
+                    Image = vm.Image,
                 };
                 var owner = _unitOfWork.Owner.GetById(vm.Selectnameowner);
                 apm.Owner = owner;
                 
-                Console.Write("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-                Console.Write(vm.Selectnameowner);
                 _unitOfWork.Apartment.Insert(apm);
                 _unitOfWork.Save();
                 return RedirectToAction("Index");

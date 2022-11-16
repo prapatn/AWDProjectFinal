@@ -20,7 +20,7 @@ namespace AWDProjectFinal.Repositories
 
         public OwnerApartment GetById(int Id)
         {
-            throw new NotImplementedException();
+            return _context.OwnerApartments.FirstOrDefault(x => x.Id == Id);
         }
 
         public void Update(OwnerApartment owner)
