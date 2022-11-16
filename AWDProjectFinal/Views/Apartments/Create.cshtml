@@ -29,8 +29,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="ApartmentType" class="control-label"></label>
-                <input asp-for="ApartmentType" class="form-control" />
-                <span asp-validation-for="ApartmentType" class="text-danger"></span>
+                <select class="form-control" id="ApartmentType" name="ApartmentType" asp-for="ApartmentType" >
+                <option>Male</option> 
+                <option>Female</option>
+                <option>All</option> 
+            </select>
             </div>
             <div class="form-group">
                 <label asp-for="AmountRoom" class="control-label"></label>
