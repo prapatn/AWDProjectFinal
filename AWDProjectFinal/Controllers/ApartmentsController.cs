@@ -3,6 +3,7 @@ using AWDProjectFinal.interfaces;
 using AWDProjectFinal.Models;
 using AWDProjectFinal.ViewModels.ApartmentsViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AWDProjectFinal.Controllers
 { 
@@ -41,24 +42,57 @@ namespace AWDProjectFinal.Controllers
         // GET: ApartmentsController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var model = _unitOfWork.Apartment.GetById(id);
+            var vm = _mapper.Map<ApartmentViewModel>(model);
+
+            return View(vm);
         }
 
         // GET: ApartmentsController/Create
         public ActionResult Create()
         {
+            var tagsFromRepo = _unitOfWork.Owner.GetAll();
+            var selectList = new List<SelectListItem>();
+            foreach(var item in tagsFromRepo)
+            {
+                selectList.Add(new SelectListItem(item.Name, item.Id.ToString()));
+            }
+            var vm = new CreatePostViewModel()
+            {
+                selectOwner = selectList
+            };
             
-            return View();
+            return View(vm);
         }
 
         // POST: ApartmentsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(CreatePostViewModel vm)
         {
             try
-            {
-                return RedirectToAction(nameof(Index));
+            { 
+                ApartmentModel apm = new ApartmentModel()
+                {
+                    Name = vm.Name,
+                    Address = vm.Address,
+                    AmountRoom = vm.AmountRoom,
+                    ApartmentType = vm.ApartmentType,
+                    ImageFile = vm.ImageFile,
+                };
+                var owner = _unitOfWork.Owner.GetById(vm.Selectnameowner);
+                apm.Owner = owner;
+                if (vm.ImageFile != null)
+                {
+                    string filePath = Path.Combine(_hostEnvironment.WebRootPath, "images", vm.Name);
+                    System.IO.File.Delete(filePath);
+                    apm.Image = UploadFile(apm);
+                }
+
+                _unitOfWork.Apartment.Insert(apm);
+                _unitOfWork.Save();
+                return RedirectToAction("Index");
+
             }
             catch
             {
@@ -84,14 +118,14 @@ namespace AWDProjectFinal.Controllers
             {
                 string filePath = Path.Combine(_hostEnvironment.WebRootPath, "images", vm.Name);
                 System.IO.File.Delete(filePath);
-                model.Image = UploadFile(vm);
+                model.Image = UploadFile(model);
             }
             _unitOfWork.Apartment.Update(model);
             _unitOfWork.Save();
             return RedirectToAction("Index", "Apartments");
         }
 
-        private string UploadFile(ApartmentViewModel p)
+        private string UploadFile(ApartmentModel p)
         {
             string fileName = ""; 
             if (p.ImageFile != null)
