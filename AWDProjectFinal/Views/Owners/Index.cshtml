@@ -27,10 +27,6 @@
     </head>
     <body>
       <h1 class="h1 mb-2 text-gray-900">รายการเจ้าของหอพัก</h1>
-        
-
-       
-        
         <br />
         
         <div class="card shadow mb-4">
@@ -60,60 +56,62 @@
             
             
             <div class="card-body">
-                     <table class="table">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Id)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Name)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Phone)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Image)
-                            </th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @foreach (var item in Model) {
+                <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
                             <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Id)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Phone)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Image)
-                                </td>
-            
-                                <td>
-                                    
-                                    <div class="btn btn-info btn-circle btn-sm">
-                                        <i class="fas fa-info-circle"></i>
-                                    </div>
-                                    @Html.ActionLink("Details", "Details", new {  id=item.Id})
-                                    <div href="#" class="btn btn-warning btn-circle btn-sm">
-                                        <i class="fas fa-pen"></i>
-                                    </div>
-                                    @Html.ActionLink("Edit", "Edit", new {  id=item.Id})
-                                    <div href="#" class="btn btn-danger btn-circle btn-sm">
-                                        <i class="fas fa-trash"></i>
-                                    </div>
-                                    @Html.ActionLink("Delete", "Delete", new {  id=item.Id}, new { onclick = "return confirm('Are sure wants to delete?');" })
-                                </td>
-            
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Id)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Phone)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Image)
+                                </th>
+                                <th></th>
                             </tr>
-                    }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @foreach (var item in Model) {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Phone)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Image)
+                                    </td>
+            
+                                    <td>
+                                    
+                                        <div class="btn btn-info btn-circle btn-sm">
+                                            <i class="fas fa-info-circle"></i>
+                                        </div>
+                                        @Html.ActionLink("Details", "Details", new {  id=item.Id})
+                                        <div href="#" class="btn btn-warning btn-circle btn-sm">
+                                            <i class="fas fa-pen"></i>
+                                        </div>
+                                        @Html.ActionLink("Edit", "Edit", new {  id=item.Id})
+                                        <div href="#" class="btn btn-danger btn-circle btn-sm">
+                                            <i class="fas fa-trash"></i>
+                                        </div>
+                                        @Html.ActionLink("Delete", "Delete", new {  id=item.Id}, new { onclick = "return confirm('Are sure wants to delete?');" })
+                                    </td>
+            
+                                </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
        
