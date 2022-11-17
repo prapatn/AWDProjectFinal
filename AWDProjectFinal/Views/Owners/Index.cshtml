@@ -1,0 +1,121 @@
+﻿@model IEnumerable<AWDProjectFinal.Models.OwnerApartment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<html>
+    <head>
+         <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>SB Admin 2 - Tables</title>
+
+        <!-- Custom fonts for this template -->
+        <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="~/css/sb-admin-2.min.css" rel="stylesheet">
+
+        <!-- Custom styles for this page -->
+        <link href="~/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    </head>
+    <body>
+      <h1 class="h1 mb-2 text-gray-900">รายการเจ้าของหอพัก</h1>
+        <br />
+        
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 bg-gradient-primary">
+                <h6 class="m-0 font-weight-bold text-white">ตารางจัดการข้อมูลเจ้าของหอพัก</h6>
+             </div>
+             <br />
+              <div class="col center">
+                 <div class="row">
+                     <div class="col-lg-9">
+                         <div class="search-bar">        
+                             <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" asp-controller="Owners" asp-action="Index" method="get">
+                                 <input type="text" class="form-control bg-gray-200 border-0 small" name="search" placeholder="Search" title="Enter search keyword" width="200">
+                                 <button type="submit" title="Search" class="btn btn-primary"><i class="fas fa-search fa-sm"></i></button>
+                             </form>
+                         </div>
+                         
+                    </div>
+                    <div class="col-lg-3">
+                        
+                         <div style="width: 150px;">
+                            <a asp-action="Create" class="btn btn-success btn-block" >Create New</a>
+                        </div>
+                    </div>
+                 </div>
+              </div>
+            
+            
+            <div class="card-body">
+              
+                <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Id)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Phone)
+                                </th>
+                                <th  style="width: 50px;">
+                                    @Html.DisplayNameFor(model => model.Image)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var item in Model) {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Phone)
+                                    </td>
+                                    <td  style="width: 50px;">
+                                        @Html.DisplayFor(modelItem => item.Image)
+                                    </td>
+            
+                                    <td>
+                                    
+                                        <div class="btn btn-info btn-circle btn-sm">
+                                            <i class="fas fa-info-circle"></i>
+                                        </div>
+                                        @Html.ActionLink("Details", "Details", new {  id=item.Id})
+                                        <div href="#" class="btn btn-warning btn-circle btn-sm">
+                                            <i class="fas fa-pen"></i>
+                                        </div>
+                                        @Html.ActionLink("Edit", "Edit", new {  id=item.Id})
+                                        <div href="#" class="btn btn-danger btn-circle btn-sm">
+                                            <i class="fas fa-trash"></i>
+                                        </div>
+                                        @Html.ActionLink("Delete", "Delete", new {  id=item.Id}, new { onclick = "return confirm('Are sure wants to delete?');" })
+                                    </td>
+            
+                                </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+       
+    </body>
+</html>
+

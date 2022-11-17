@@ -1,0 +1,56 @@
+﻿@model IEnumerable<AWDProjectFinal.Models.ApartmentModel>
+
+<table class="table">
+    <thead>
+         <tr>
+               <th>
+                    @Html.DisplayNameFor(m=>m.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m=>m.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m=>m.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m=>m.ApartmentType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m=>m.AmountRoom)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m=>m.Owner)
+                </th>
+                <th>
+          
+                </th>
+          </tr>
+       
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m=>item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(m=>item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(m=>item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(m=>item.ApartmentType)
+                </td>
+                <td>
+                    @Html.DisplayFor(m=>item.AmountRoom)
+                </td>
+                <td>
+                    @Html.DisplayFor(m=>item.Owner)
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
